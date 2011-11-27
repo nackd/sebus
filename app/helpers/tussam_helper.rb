@@ -1,0 +1,2 @@
+module TussamHelper
+end

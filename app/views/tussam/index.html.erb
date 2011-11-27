@@ -1,0 +1,11 @@
+<div data-role="header">
+  <h1>Tussam#index</h1>
+</div>
+
+<div data-role="content">
+  <%= form_for :estimate, :url => tussam_estimate_path do |f|%>
+    <div data-role="fieldcontain"><%= f.label :line, 'Linea' %><%= f.text_field :line %></div>
+    <div data-role="fieldcontain"><%= f.label :stop, 'Parada'%><%= f.text_field :stop %></div>
+    <div><%= f.submit %></div>
+  <% end %>
+</div>

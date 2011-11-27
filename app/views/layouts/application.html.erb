@@ -2,13 +2,17 @@
 <html>
 <head>
   <title>Tussam</title>
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
+  <script type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
+<div data-role="page">
 <%= yield %>
+</div>
 
 </body>
 </html>
