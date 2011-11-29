@@ -7,12 +7,24 @@
   <%= javascript_include_tag "application" %>
   <script type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
   <%= csrf_meta_tags %>
+
+  <script type="text/javascript">
+    $('#index').live('pageshow',function(event, ui){
+        navigator.geolocation.getCurrentPosition(
+          function(pos){ // success
+            $.mobile.changePage("<%= url_for(:action => :stops) %>",
+                                { changeHash: false,
+                                  type: "post",
+                                  data: {lat: pos.coords.latitude, lon: pos.coords.longitude} })
+          },
+          function(err){ // error
+            // TODO alert(err.code)
+          },
+          {enableHighAccuracy: true, maximumAge:60000, timeout:30000}) // options
+    });
+  </script>
 </head>
 <body>
-
-<div data-role="page">
 <%= yield %>
-</div>
-
 </body>
 </html>

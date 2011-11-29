@@ -1,6 +1,7 @@
 Tussam::Application.routes.draw do
   get "tussam/index"
-  post "tussam/estimate"
+  post "tussam/stops"
+  get "tussam/estimate/:id" => "tussam#estimate", :as => :tussam_estimate
   root :to => "tussam#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.

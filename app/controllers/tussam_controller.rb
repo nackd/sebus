@@ -1,5 +1,6 @@
 class TussamController < ApplicationController
-  def index
+  def stops
+    @stops = Stop.near(location: [params[:lat], params[:lon]]).limit(20)
   end
 
   def estimate
