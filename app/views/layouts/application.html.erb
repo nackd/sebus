@@ -15,7 +15,7 @@
             $.mobile.changePage("<%= url_for(:action => :stops) %>",
                                 { changeHash: false,
                                   type: "post",
-                                  data: {lat: pos.coords.latitude, lon: pos.coords.longitude} })
+                                  data: {lat: pos.coords.latitude, lng: pos.coords.longitude} })
           },
           function(err){ // error
             // TODO alert(err.code)
