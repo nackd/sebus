@@ -6,24 +6,24 @@
 <ul data-role="listview" data-inset="true">
   <% @estimate.each do |line, estimation| %>
   <li data-role="list-divider">
-    <h3><%=h line %></h3>
+    <h3><%= line %></h3>
   </li>
   <li>
     <div class="ui-grid-a">
       <div class="ui-block-a">
         <p style="margin-top:0"><strong>
-          <%=h (m = estimation.first[:time]).nil? ? "No hay estimaciones" : "#{m} minutos" %>
+          <%= (m = estimation.first[:time]).nil? ? "No hay estimaciones" : "#{m} minutos" %>
         </strong></p>
         <p>
-          <%=h (d = estimation.first[:distance]).nil? ? "" : "#{d} metros" %>
+          <%= (d = estimation.first[:distance]).nil? ? "" : "#{d} metros" %>
         </p>
       </div>
       <div class="ui-block-b">
         <p style="margin-top:0"><strong>
-          <%=h (m = estimation.last[:time]).nil? ? "" : "#{m} minutos" %>
+          <%= (m = estimation.last[:time]).nil? ? "" : "#{m} minutos" %>
         </strong></p>
         <p>
-          <%=h (d = estimation.last[:distance]).nil? ? "" : "#{d} metros" %>
+          <%= (d = estimation.last[:distance]).nil? ? "" : "#{d} metros" %>
         </p>
       </div>
     </div>
