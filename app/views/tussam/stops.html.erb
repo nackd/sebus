@@ -6,8 +6,8 @@
   <ul data-role="listview">
   <% @stops.each do |stop| %>
     <li><a href="<%= url_for(:action => :estimate, :id => stop.number) %>">
-      <h3><%= stop.name %></h3>
       <p><strong><%= stop.number %></strong></p>
+      <h3 style="overflow:visible"><%= stop.name %></h3>
       <p><%= stop.distance_to(params[:lat], params[:lng]) %> m</p>
       <p class="ui-li-aside"><strong><%= stop.lines.join ", " %></strong></p>
     </a></li>
