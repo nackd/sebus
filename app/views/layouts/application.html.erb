@@ -27,6 +27,15 @@
 <body>
 <div data-role="page" id="<%= params[:action] %>">
 <%= yield %>
+<div data-role="footer" data-position="fixed">
+  <div data-role="navbar">
+    <ul>
+      <li><%= link_to "Paradas cercanas", :root, :"data-icon" => "star" %></li>
+      <li><%= link_to "Buscar parada", { :action => :stops }, :"data-icon" => "search" %></li>
+      <li><%= link_to "Acerca de", :root, :"data-icon" => "info" %></li>
+    </ul>
+  </div>
+</div>
 </div>
 </body>
 </html>
