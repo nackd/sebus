@@ -9,7 +9,7 @@
   <%= csrf_meta_tags %>
 
   <script type="text/javascript">
-    $('#index').live('pageshow',function(event, ui){
+    $('#location').live('pageshow',function(event, ui){
         navigator.geolocation.getCurrentPosition(
           function(pos){ // success
             $.mobile.changePage("<%= url_for(:action => :stops) %>",
@@ -30,8 +30,8 @@
 <div data-role="footer" data-position="fixed">
   <div data-role="navbar">
     <ul>
-      <li><%= link_to "Paradas cercanas", :root, :"data-icon" => "star" %></li>
-      <li><%= link_to "Buscar parada", { :action => :stops }, :"data-icon" => "search" %></li>
+      <li><%= link_to "Buscar parada", :root, :"data-icon" => "search" %></li>
+      <li><%= link_to "Paradas cercanas", { :action => :location }, :"data-icon" => "star" %></li>
       <li><%= link_to "Acerca de", :root, :"data-icon" => "info" %></li>
     </ul>
   </div>
