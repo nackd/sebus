@@ -1,3 +1,15 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+$('#location').live('pageshow',
+    (event, ui) -> navigator.geolocation.getCurrentPosition(
+        # success
+        (pos) -> $.mobile.changePage("/stops"
+                                     changeHash: false
+                                     type: "post"
+                                     data:
+                                         lat: pos.coords.latitude
+                                         lng: pos.coords.longitude
+        ) # error
+        (err) -> # TODO
+        # options
+        enableHighAccuracy: true, maximumAge: 60000, timeout: 30000
+    )
+)
