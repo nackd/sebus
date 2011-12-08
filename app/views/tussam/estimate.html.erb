@@ -11,7 +11,7 @@
   <li>
     <div class="ui-grid-a">
       <div class="ui-block-a">
-        <p style="margin-top:0"><strong>
+        <p><strong>
           <%= (m = estimation.first[:time]).nil? ? "No hay estimaciones" : "#{m} minutos" %>
         </strong></p>
         <p>
@@ -19,7 +19,7 @@
         </p>
       </div>
       <div class="ui-block-b">
-        <p style="margin-top:0"><strong>
+        <p><strong>
           <%= (m = estimation.last[:time]).nil? ? "" : "#{m} minutos" %>
         </strong></p>
         <p>
