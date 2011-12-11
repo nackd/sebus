@@ -1,21 +1,3 @@
-== About
-
-Source code for http://sebus.heroku.com.
-
-Mobile application to look up vehicle arrival times for Seville public bus
-service.
-
-Neither the application nor its developers have anything to do with TUSSAM or
-the Seville City Council.
-
-== Deploy notes
-
-Don't forget to create the model indexes on the production database:
-
-    rake db:mongoid:create_indexes
-
-== License
-
 Copyright (c) 2011 José Manuel Prieto
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
