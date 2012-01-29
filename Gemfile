@@ -6,13 +6,6 @@ gem 'bson_ext', '~> 1.4'
 gem 'savon', '~> 0.9'
 gem 'geokit', '~> 1.6'
 
-# Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
-
-
-
-# Gems used only for assets and not required
-# in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.1.5'
   gem 'coffee-rails', '~> 3.1.1'
@@ -21,17 +14,11 @@ end
 
 gem 'jquery-rails'
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
+group :development do
+  gem 'guard-rails'
+  gem 'rb-inotify', :require => false
+  gem 'libnotify', :require => false
+end
 
 group :test do
   # Pretty printed test output
