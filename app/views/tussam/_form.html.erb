@@ -1,0 +1,7 @@
+<%= form_tag post_estimate_path do |f| %>
+  <div data-role="fieldcontain">
+    <%= label_tag :id, "Número de parada" %>
+    <%= text_field_tag :id %>
+  </div>
+  <div><%= submit_tag "Obtener estimaciones" %></div>
+<% end %>
