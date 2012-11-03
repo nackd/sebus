@@ -1,14 +1,13 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.3'
-gem 'mongoid', '~> 2.3'
-gem 'bson_ext', '~> 1.4'
+gem 'rails', '3.2.8'
+gem 'mongoid', '~> 3.0.10'
 gem 'savon', '~> 0.9'
 gem 'geokit', '~> 1.6'
 
 group :assets do
-  gem 'sass-rails',   '~> 3.1.5'
-  gem 'coffee-rails', '~> 3.1.1'
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -22,5 +21,5 @@ end
 
 group :test do
   # Pretty printed test output
-  gem 'turn', '0.8.2', :require => false
+  gem 'turn', :require => false
 end
