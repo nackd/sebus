@@ -27,8 +27,7 @@ module Tussam
   end
 
   def self.estimate(stop, line)
-    Savon.env_namespace = :soap
-    client = Savon::Client.new do
+    client = Savon.client do |wsdl, http|
       wsdl.endpoint = 'http://www.infobustussam.com:9001/services/dinamica.asmx'
       wsdl.namespace = 'http://tempuri.org/'
       http.open_timeout = 3

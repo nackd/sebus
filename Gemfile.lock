@@ -42,6 +42,14 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.4.0)
+    columnize (0.3.6)
+    debugger (1.2.1)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.1.1)
+      debugger-ruby_core_source (~> 1.1.4)
+    debugger-linecache (1.1.2)
+      debugger-ruby_core_source (>= 1.1.1)
+    debugger-ruby_core_source (1.1.4)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -123,14 +131,14 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    savon (0.9.14)
-      akami (~> 1.1)
+    savon (1.2.0)
+      akami (~> 1.2.0)
       builder (>= 2.1.2)
-      gyoku (>= 0.4.0)
-      httpi (~> 1.0)
+      gyoku (~> 0.4.5)
+      httpi (~> 1.1.0)
       nokogiri (>= 1.4.0)
-      nori (~> 1.1)
-      wasabi (~> 2.2)
+      nori (~> 1.1.0)
+      wasabi (~> 2.5.0)
     slop (3.3.3)
     sprockets (2.1.3)
       hike (~> 1.2)
@@ -156,6 +164,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
+  debugger
   geokit (~> 1.6)
   guard-rails
   jquery-rails
@@ -164,6 +173,6 @@ DEPENDENCIES
   rails (= 3.2.8)
   rb-inotify
   sass-rails (~> 3.2.3)
-  savon (~> 0.9)
+  savon (~> 1.2)
   turn
   uglifier (>= 1.0.3)
