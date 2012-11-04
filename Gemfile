@@ -4,6 +4,7 @@ gem 'rails', '3.2.8'
 gem 'mongoid', '~> 3.0.10'
 gem 'savon', '~> 1.2'
 gem 'geokit', '~> 1.6'
+gem 'rack-offline'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
