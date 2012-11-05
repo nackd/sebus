@@ -16,14 +16,8 @@ test:
 production:
   sessions:
     default:
-      hosts:
-        - <%= ENV['MONGOID_HOST'] %>:27017
-      port: <%= ENV['MONGOID_PORT'] %>
-      username: <%= ENV['MONGOID_USERNAME'] %>
-      password: <%= ENV['MONGOID_PASSWORD'] %>
-      database: <%= ENV['MONGOID_DATABASE'] %>
-      # slaves:
-        #   - host: slave1.local
-        #     port: 27018
-        #   - host: slave2.local
-        #     port: 27019
+<% if ENV['MONGOLAB_URI'] %>
+      uri: <%= ENV['MONGOLAB_URI'] %>
+<% else %>
+      uri: mongodb://localhost:27017/tussam_development
+<% end %>
