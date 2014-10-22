@@ -28,9 +28,10 @@ module Tussam
         if stop = stops.find {|s| s[:number] == number}
           stop[:lines] << line
         else
+          location = GeoUtm::UTM.new("30N", node[:posx].to_f, node[:posy].to_f).to_lat_lon
           stops << { :number => number,
                      :name => node[:nombre],
-                     :location => [node[:posy].to_f, node[:posx].to_f],
+                     :location => [location.lat, location.lon],
                      :lines => [line]
                    }
         end

@@ -55,6 +55,7 @@ GEM
     ffi (1.1.5)
     geokit (1.6.5)
       multi_json
+    geoutm (1.0.2)
     guard (1.5.3)
       listen (>= 0.4.2)
       lumberjack (>= 1.0.2)
@@ -166,6 +167,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   debugger
   geokit (~> 1.6)
+  geoutm (~> 1.0)
   guard-rails
   jquery-rails
   libnotify
