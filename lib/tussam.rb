@@ -2,17 +2,40 @@ require 'open-uri'
 
 module Tussam
   def self.update_stops
-    open('http://www.infobustussam.com:9005/tussamGO/') # Need to open a session beforehand
-    document = Nokogiri::XML(open('http://www.infobustussam.com:9005/tussamGO/Resultados?op=lp&ls=Todas'))
+    client = Savon.client do |wsdl, http|
+      wsdl.endpoint = 'http://www.infobustussam.com:9001/services/estructura.asmx'
+      wsdl.namespace = 'http://tempuri.org/'
+      http.open_timeout = 3
+      http.read_timeout = 5
+    end
 
-    stops = document.search('parada').collect { |parada|
-      {
-        :number   => parada[:numero].to_i,
-        :name     => parada.at('dato#nombre').text,
-        :location => [parada[:lat].to_f, parada[:lng].to_f],
-        :lines    => parada.search('linea').collect(&:text)
-      }
-    }
+    response1 = client.request 'wsdl:GetLineas' do
+      http.headers["SOAPAction"] = '"http://tempuri.org/GetLineas"'
+    end
+
+    stops = []
+    response1[:get_lineas_response][:get_lineas_result][:info_linea].each do |linea|
+      line = linea[:label]
+      subline = linea[:sublineas][:info_sublinea][:sublinea].to_i
+      response2 = client.request 'wsdl:GetNodosMapSublinea' do
+        http.headers["SOAPAction"] = '"http://tempuri.org/GetNodosMapSublinea"'
+        soap.body = {:"wsdl:label"  => line,
+                     :"wsdl:sublinea" => subline}
+      end
+
+      response2[:get_nodos_map_sublinea_response][:get_nodos_map_sublinea_result][:info_nodo_map].each do |node|
+        number = node[:nodo].to_i
+        if stop = stops.find {|s| s[:number] == number}
+          stop[:lines] << line
+        else
+          stops << { :number => number,
+                     :name => node[:nombre],
+                     :location => [node[:posy].to_f, node[:posx].to_f],
+                     :lines => [line]
+                   }
+        end
+      end
+    end
 
     if stops.size > 0
       Stop.delete_all
