@@ -26,7 +26,7 @@ module Tussam
       response2[:get_nodos_map_sublinea_response][:get_nodos_map_sublinea_result][:info_nodo_map].each do |node|
         number = node[:nodo].to_i
         if stop = stops.find {|s| s[:number] == number}
-          stop[:lines] << line
+          stop[:lines] |= [line]
         else
           location = GeoUtm::UTM.new("30N", node[:posx].to_f, node[:posy].to_f).to_lat_lon
           stops << { :number => number,
