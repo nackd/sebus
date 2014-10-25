@@ -60,4 +60,23 @@ Tussam::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  # Email server
+  ActionMailer::Base.smtp_settings = {
+    :port =>           '587',
+    :address =>        'smtp.mandrillapp.com',
+    :user_name =>      ENV['MANDRILL_USERNAME'],
+    :password =>       ENV['MANDRILL_APIKEY'],
+    :domain =>         'heroku.com',
+    :authentication => :plain
+  }
+  ActionMailer::Base.delivery_method = :smtp
+
+  # Exception notification
+  config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "[Tussam] ",
+    :sender_address => %{"notifier" <#{ENV['MANDRILL_USERNAME']}>},
+    :exception_recipients => ENV['EXCEPTION_RECIPIENTS'].split(';')
+  }
 end

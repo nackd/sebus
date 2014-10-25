@@ -6,6 +6,7 @@ gem 'mongoid', '~> 3.0.10'
 gem 'savon', '~> 1.2'
 gem 'geokit', '~> 1.6'
 gem 'geoutm', '~> 1.0'
+gem 'exception_notification', '~> 4.0'
 gem 'rack-offline'
 
 group :assets do
