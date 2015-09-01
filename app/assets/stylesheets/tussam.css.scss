@@ -23,9 +23,9 @@ h3 {
     text-align: center;
   }
 }
-.ui-icon-marker {
-  background-image: url("app-icon-marker.png");
+.ui-icon-marker:after {
+  background-image: image-url("app-icon-marker.png");
 }
-.ui-icon-time {
-  background-image: url("app-icon-time.png");
+.ui-icon-time:after {
+  background-image: image-url("app-icon-time.png");
 }

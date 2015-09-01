@@ -4,7 +4,10 @@ $(document).bind('mobileinit', ->
     $.mobile.pageLoadErrorMessage = "No se pudo cargar la página"
 )
 
-$('#location').live('pageshow', (event, ui) ->
+$(document).on('pagecontainershow', (event, ui) ->
+    activePage = $.mobile.pageContainer.pagecontainer("getActivePage").prop("id")
+    if activePage != 'location'
+        return
     if navigator.geolocation
         navigator.geolocation.getCurrentPosition(
             # success

@@ -1,4 +1,4 @@
-Tussam::Application.routes.draw do
+Rails.application.routes.draw do
   root :to            => "tussam#type"
   post "estimate"     => "tussam#estimate", :as => :post_estimate
   get  "estimate/:id" => "tussam#estimate", :as => :tussam_estimate
@@ -18,5 +18,5 @@ Tussam::Application.routes.draw do
     end
     network "*"
   end
-  match "/application.manifest" => offline, :as => :manifest
+  match "/application.manifest" => offline, :via => :get, :as => :manifest
 end

@@ -2,28 +2,26 @@ require 'open-uri'
 
 module Tussam
   def self.update_stops
-    client = Savon.client do |wsdl, http|
-      wsdl.endpoint = 'http://www.infobustussam.com:9001/services/estructura.asmx'
-      wsdl.namespace = 'http://tempuri.org/'
-      http.open_timeout = 3
-      http.read_timeout = 5
+    client = Savon.client do
+      endpoint 'http://www.infobustussam.com:9001/services/estructura.asmx'
+      namespace 'http://tempuri.org/'
+      open_timeout 3
+      read_timeout 5
     end
 
-    response1 = client.request 'wsdl:GetLineas' do
-      http.headers["SOAPAction"] = '"http://tempuri.org/GetLineas"'
-    end
+    response1 = client.call('GetLineas', soap_action: 'http://tempuri.org/GetLineas')
 
     stops = []
-    response1[:get_lineas_response][:get_lineas_result][:info_linea].each do |linea|
+    response1.body[:get_lineas_response][:get_lineas_result][:info_linea].each do |linea|
       line = linea[:label]
       subline = linea[:sublineas][:info_sublinea][:sublinea].to_i
-      response2 = client.request 'wsdl:GetNodosMapSublinea' do
-        http.headers["SOAPAction"] = '"http://tempuri.org/GetNodosMapSublinea"'
-        soap.body = {:"wsdl:label"  => line,
-                     :"wsdl:sublinea" => subline}
-      end
+      response2 = client.call('GetNodosMapSublinea',
+        soap_action: "http://tempuri.org/GetNodosMapSublinea",
+        message: {'wsdl:label':  line,
+                  'wsdl:sublinea': subline}
+      )
 
-      response2[:get_nodos_map_sublinea_response][:get_nodos_map_sublinea_result][:info_nodo_map].each do |node|
+      response2.body[:get_nodos_map_sublinea_response][:get_nodos_map_sublinea_result][:info_nodo_map].each do |node|
         number = node[:nodo].to_i
         if stop = stops.find {|s| s[:number] == number}
           stop[:lines] |= [line]
@@ -51,20 +49,20 @@ module Tussam
   end
 
   def self.estimate(stop, line)
-    client = Savon.client do |wsdl, http|
-      wsdl.endpoint = 'http://www.infobustussam.com:9001/services/dinamica.asmx'
-      wsdl.namespace = 'http://tempuri.org/'
-      http.open_timeout = 3
-      http.read_timeout = 5
+    client = Savon.client do
+      endpoint 'http://www.infobustussam.com:9001/services/dinamica.asmx'
+      namespace 'http://tempuri.org/'
+      open_timeout 3
+      read_timeout 5
     end
 
-    response = client.request 'wsdl:GetPasoParada' do
-      http.headers["SOAPAction"] = '"http://tempuri.org/GetPasoParada"'
-      soap.body = {:"wsdl:linea"  => line,
-                   :"wsdl:parada" => stop,
-                   :"wsdl:status" => 1}
-    end
-    estimation = response[:get_paso_parada_response][:get_paso_parada_result][:paso_parada]
+    response = client.call('GetPasoParada',
+      soap_action: "http://tempuri.org/GetPasoParada",
+      message: {'wsdl:linea':  line,
+                'wsdl:parada': stop,
+                'wsdl:status': 1}
+    )
+    estimation = response.body[:get_paso_parada_response][:get_paso_parada_result][:paso_parada]
 
     [{:time => estimation[:e1][:minutos], :distance => estimation[:e1][:metros]},
      {:time => estimation[:e2][:minutos], :distance => estimation[:e2][:metros]}]

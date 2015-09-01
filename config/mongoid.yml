@@ -1,12 +1,12 @@
 development:
-  sessions:
+  clients:
     default:
       hosts:
         - localhost:27017
       database: tussam_development
 
 test:
-  sessions:
+  clients:
     default:
       hosts:
         - localhost:27017
@@ -14,10 +14,13 @@ test:
 
 # set these environment variables on your prod server
 production:
-  sessions:
+  clients:
     default:
 <% if ENV['MONGOLAB_URI'] %>
       uri: <%= ENV['MONGOLAB_URI'] %>
 <% else %>
       uri: mongodb://localhost:27017/tussam_development
 <% end %>
+      options:
+        min_pool_size: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>
+        max_pool_size: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>
