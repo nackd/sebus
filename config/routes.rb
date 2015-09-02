@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  root :to            => "tussam#type"
-  post "estimate"     => "tussam#estimate", :as => :post_estimate
-  get  "estimate/:id" => "tussam#estimate", :as => :tussam_estimate
-  get  "location"     => "tussam#location"
-  get  "nolocation"   => "tussam#nolocation"
-  post "stops"        => "tussam#stops"
-  get  "about"        => "tussam#about"
+  root :to            => "sebus#type"
+  post "estimate"     => "sebus#estimate", :as => :post_estimate
+  get  "estimate/:id" => "sebus#estimate", :as => :tussam_estimate
+  get  "location"     => "sebus#location"
+  get  "nolocation"   => "sebus#nolocation"
+  post "stops"        => "sebus#stops"
+  get  "about"        => "sebus#about"
 
   offline = Rack::Offline.configure do
     cache "/"

@@ -1,4 +1,4 @@
-class TussamController < ApplicationController
+class SebusController < ApplicationController
   def stops
     @stops = Stop.near(location: [params[:lat].to_f, params[:lng].to_f]).limit(20)
   end
