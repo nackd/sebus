@@ -76,12 +76,13 @@ Rails.application.configure do
 
   # Email server
   ActionMailer::Base.smtp_settings = {
-    :port =>           '587',
-    :address =>        'smtp.mandrillapp.com',
-    :user_name =>      ENV['MANDRILL_USERNAME'],
-    :password =>       ENV['MANDRILL_APIKEY'],
-    :domain =>         'heroku.com',
-    :authentication => :plain
+    :address              => 'smtp.sendgrid.net',
+    :port                 => '587',
+    :user_name            => ENV['SENDGRID_USERNAME'],
+    :password             => ENV['SENDGRID_PASSWORD'],
+    :domain               => 'heroku.com',
+    :authentication       => :plain,
+    :enable_starttls_auto => true
   }
   ActionMailer::Base.delivery_method = :smtp
 
@@ -89,7 +90,7 @@ Rails.application.configure do
   config.middleware.use ExceptionNotification::Rack,
   :email => {
     :email_prefix => "[Sebus] ",
-    :sender_address => %{"notifier" <#{ENV['MANDRILL_USERNAME']}>},
+    :sender_address => %{"notifier" <#{ENV['SENDGRID_USERNAME']}>},
     :exception_recipients => ENV['EXCEPTION_RECIPIENTS'].split(';')
   }
 end
